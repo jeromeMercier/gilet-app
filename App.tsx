@@ -22,7 +22,7 @@ function App({navigation}: {navigation: any}) {
     // @ts-ignore On ignoire l'erreur pcq on utilise pas un format de Theme classique
     // <Tab.Screen name="Template Screen" component={TemplateScreen} />
     <NavigationContainer theme={MyTheme}>
-    <Tab.Navigator tabBar={props => <MyTabBar {...props} />} >
+    <Tab.Navigator tabBar={props => <MyTabBar {...props} />}  initialRouteName="Home" >
         <Tab.Screen name="Pictures" component={Pictures}/>
         <Tab.Screen name="Beer" component={Beers}/>
         <Tab.Screen name="Home" component={HomeScreen}/>
