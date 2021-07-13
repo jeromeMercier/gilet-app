@@ -1,4 +1,6 @@
 import { StyleSheet } from 'react-native'
+
+
   
  const styles = StyleSheet.create({   
    container: {                       
@@ -6,6 +8,13 @@ import { StyleSheet } from 'react-native'
      backgroundColor: '#ededed',
      flexWrap: 'wrap'
    }
+ })
+
+ const fonts = StyleSheet.create({
+     title: {
+        fontFamily: 'Euro-Bold',
+        fontSize:24
+     }
  })
   
  const buttons = StyleSheet.create({  
@@ -19,6 +28,7 @@ import { StyleSheet } from 'react-native'
      marginRight: 20
    }
  })
+ 
 
  const MyTheme = {
     dark: false,
@@ -29,4 +39,4 @@ import { StyleSheet } from 'react-native'
     },
   };
   
- export { styles, buttons, MyTheme }
+ export { styles, buttons, MyTheme, fonts }

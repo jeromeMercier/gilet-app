@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet} from 'react-native';
-import { styles } from '../style/appStyle';
+import { styles, fonts } from '../style/appStyle';
 import VoteButton from '../components/VoteButton';
 
 
@@ -8,6 +8,7 @@ import VoteButton from '../components/VoteButton';
 function HomeScreen({navigation}: {navigation: any}) {
   return (
     <View style={style.container}>
+        <Text style={fonts.title}>Titre</Text>
       <VoteButton></VoteButton>
     </View>
   );
