@@ -20,7 +20,7 @@ function App({ navigation }: { navigation: any }) {
     "Euro-Bold": require("./assets/fonts/EurostileBold.ttf"),
     "Euro-Extended": require("./assets/fonts/EurostileExtended.ttf"),
     "Euro-Oblique": require("./assets/fonts/EurostileOblique.ttf"),
-    "Euro-Normal": require("./assets/fonts/EuroStyle Normal.ttf")
+    "Euro-Normal": require("./assets/fonts/EuroStyleNormal.ttf")
   });
   if (!fontsLoaded) {
     return <AppLoading />;
