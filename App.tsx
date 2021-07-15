@@ -12,6 +12,7 @@ import { MyTheme } from "./style/appStyle";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -20,7 +21,7 @@ function App({ navigation }: { navigation: any }) {
     "Euro-Bold": require("./assets/fonts/EurostileBold.ttf"),
     "Euro-Extended": require("./assets/fonts/EurostileExtended.ttf"),
     "Euro-Oblique": require("./assets/fonts/EurostileOblique.ttf"),
-    "Euro-Normal": require("./assets/fonts/EuroStyleNormal.ttf")
+    "Euro-Normal": require("./assets/fonts/EuroStyleNormal.ttf"),
   });
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -28,17 +29,17 @@ function App({ navigation }: { navigation: any }) {
     return (
       // @ts-ignore On ignoire l'erreur pcq on utilise pas un format de Theme classique
       // <Tab.Screen name="Template Screen" component={TemplateScreen} />
-      <NavigationContainer theme={MyTheme}>
-        <Tab.Navigator
-          tabBar={(props) => <MyTabBar {...props} />}
-          initialRouteName="Home"
-        >
-          <Tab.Screen name="Pictures" component={Pictures} />
-          <Tab.Screen name="Beer" component={Beers} />
-          <Tab.Screen name="Home" component={HomeScreen} />
-          <Tab.Screen name="Stats" component={Stats} />
-        </Tab.Navigator>
-      </NavigationContainer>
+        <NavigationContainer theme={MyTheme}>
+          <Tab.Navigator
+            tabBar={(props) => <MyTabBar {...props} />}
+            initialRouteName="Home"
+          >
+            <Tab.Screen name="Pictures" component={Pictures} />
+            <Tab.Screen name="Beer" component={Beers} />
+            <Tab.Screen name="Home" component={HomeScreen} />
+            <Tab.Screen name="Stats" component={Stats} />
+          </Tab.Navigator>
+        </NavigationContainer>
     );
   }
 }
