@@ -52,7 +52,7 @@ function MyTabBar({ state, descriptors, navigation }) {
         };
 
         return (
-          <TouchableWithoutFeedback onPress={onPress}>
+          <TouchableWithoutFeedback onPress={onPress} key={index}>
             <View
               // @ts-ignore On ignoire l'erreur parcequ on utilise pas un format de Theme classique
               style={{

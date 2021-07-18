@@ -12,7 +12,7 @@ let initialArr = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
         <View style={style.mainContainer}>
     {initialArr.map((prop, key) => {
          return (
-            <View style={style.container}>
+            <View style={style.container} key={key}>
 <ProfilDescription  name={prop} place="second" vote={true} navigation={navigation}></ProfilDescription>
             </View>
            

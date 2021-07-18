@@ -11,6 +11,9 @@ import Stats from "./views/Stats";
 import { MyTheme } from "./style/appStyle";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
+import {Provider} from 'react-redux';
+import {store} from './store/store.js';
+import Signup from './views/Signup';
 
 
 const Stack = createStackNavigator();
@@ -27,19 +30,20 @@ function App({ navigation }: { navigation: any }) {
     return <AppLoading />;
   } else {
     return (
-      // @ts-ignore On ignoire l'erreur pcq on utilise pas un format de Theme classique
-      // <Tab.Screen name="Template Screen" component={TemplateScreen} />
+      <Provider store={store}>
         <NavigationContainer theme={MyTheme}>
           <Tab.Navigator
             tabBar={(props) => <MyTabBar {...props} />}
             initialRouteName="Home"
           >
-            <Tab.Screen name="Pictures" component={Pictures} />
-            <Tab.Screen name="Beer" component={Beers} />
-            <Tab.Screen name="Home" component={HomeScreen} />
-            <Tab.Screen name="Stats" component={Stats} />
+            <Tab.Screen name="Pictures" component={Pictures} key="Pictures"/>
+            <Tab.Screen name="Beer" component={Beers} key="Beer"/>
+            <Tab.Screen name="signup" component={Signup} key="signUp"/>
+            <Tab.Screen name="Home" component={HomeScreen} key="Home"/>
+            <Tab.Screen name="Stats" component={Stats} key="Stats"/>
           </Tab.Navigator>
         </NavigationContainer>
+        </Provider>
     );
   }
 }
