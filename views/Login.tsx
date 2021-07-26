@@ -1,62 +1,86 @@
+
 import React from 'react'
 import { View, TextInput, StyleSheet, TouchableOpacity, Text, Button } from 'react-native'
-import Firebase from '../store/Firebase'
-import { withNavigation } from 'react-navigation';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { updateEmail, updatePassword, login, getUser } from '../store/actions'
+import Firebase from '../store/firebase'
+import ButtonPrimary from '../components/ButtonPrimary'
+import Icons from '../components/Icons'
 
 class Login extends React.Component {
-    state = {
-        email: '',
-        password: ''
-    }
     handleLogin = () => {
-        const { email, password } = this.state
-
-        Firebase.auth()
-            .signInWithEmailAndPassword(email, password)
-            .then(() => this.props.navigation.navigate('Profile'))
-            .catch(error => console.log(error))
+        this.props.login()
+        this.props.navigation.navigate('Recap')
+    }
+    componentDidMount = () => {
+        Firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.props.getUser(user.uid)
+                if (this.props.user != null) {
+                    this.props.navigation.navigate('Recap')
+                }
+            }
+        })
     }
     render() {
         return (
             <View style={styles.container}>
+                <View style={styles.logoContainer}>
+        <Icons name="logoGDORbAw"></Icons>
+        </View>
                 <TextInput
                     style={styles.inputBox}
-                    value={this.state.email}
-                    onChangeText={email => this.setState({ email })}
+                    value={this.props.user.email}
+                    onChangeText={email => this.props.updateEmail(email)}
                     placeholder='Email'
                     autoCapitalize='none'
                 />
                 <TextInput
                     style={styles.inputBox}
-                    value={this.state.password}
-                    onChangeText={password => this.setState({ password })}
+                    value={this.props.user.password}
+                    onChangeText={password => this.props.updatePassword(password)}
                     placeholder='Password'
                     secureTextEntry={true}
                 />
-               <TouchableOpacity style={styles.button} onPress={this.handleLogin}>
-                <Text style={styles.buttonText}>Login</Text>
-            </TouchableOpacity>
-                <Button title="Don't have an account yet? Sign up" />
-            </View>
+                <View style={styles.containerButton}>
+                <ButtonPrimary  onPress={() => this.props.login()} title="Login">
+
+            </ButtonPrimary>
+</View></View>
         )
     }
+    
 }
 
 const styles = StyleSheet.create({
+    logoContainer: {
+        paddingVertical:"10%",
+        height:"30%",
+        width:"100%"
+    },
+    containerButton: {
+        width:"100%",
+        paddingHorizontal:"10%",
+        paddingTop:"10%",
+        paddingBottom:"5%"
+    },
     container: {
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        width:"100%"
     },
     inputBox: {
         width: '85%',
         margin: 10,
         padding: 15,
-        fontSize: 16,
+        fontSize: 20,
         borderColor: '#d3d3d3',
         borderBottomWidth: 1,
-        textAlign: 'center'
+
+        fontFamily:'Euro-Bold'
     },
     button: {
         marginTop: 30,
@@ -67,7 +91,7 @@ const styles = StyleSheet.create({
         borderColor: '#F6820D',
         borderWidth: 1,
         borderRadius: 5,
-        width: 200
+        width: '100%'
     },
     buttonText: {
         fontSize: 20,
@@ -79,4 +103,17 @@ const styles = StyleSheet.create({
     }
 })
 
-export default withNavigation(Login);
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators({ updateEmail, updatePassword, login, getUser }, dispatch)
+}
+
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Login)

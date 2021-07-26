@@ -7,11 +7,11 @@ import ProfilDescription from "./ProfilDescription"
 function VoteButton() {
   return (
     <View style={style.mainContainer}>
-        <View style={style.firstContainer}><ProfilDescription place="first" name="Margue"></ProfilDescription></View>
+        <View style={style.firstContainer}><ProfilDescription place="first" name="A définir"></ProfilDescription></View>
         
         <View style={style.secondContainer}>
-            <ProfilDescription place="second" name="Hugo"></ProfilDescription>
-            <ProfilDescription place="third" name="Pat"></ProfilDescription>
+            <ProfilDescription place="second" name="A définir"></ProfilDescription>
+            <ProfilDescription place="third" name="A définir"></ProfilDescription>
         </View>
         
     </View>

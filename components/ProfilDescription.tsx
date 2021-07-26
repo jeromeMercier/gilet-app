@@ -35,18 +35,20 @@ function ProfilDescription(props ) {
 function TextDescription(props){
     if(props.isFirst=="first"){
         return (
+          /*<Text style={fonts.subTitle}>{"\n"}2m50 120kg {"\n"}{"\n"}Gilet d’or pour la 1ere fois</Text>
+      <Text style={fonts.subTitle}>{"\n"}13 Votes</Text>*/
             <View style={style.textDescription}>
       <Text style={fonts.h1} >{props.name.toUpperCase()}</Text>
-      <Text style={fonts.subTitle}>{"\n"}2m50 120kg {"\n"}{"\n"}Gilet d’or pour la 1ere fois</Text>
-      <Text style={fonts.subTitle}>{"\n"}13 Votes</Text>
+      
           </View>
         )
     }
     else{
         return (
+          /*<Text style={fonts.subSubTitle}>{"\n"}0x Gilet d'or{"\n"}2 Votes</Text>*/
             <View style={style.textDescription}>
       <Text style={fonts.h2} >{props.name}</Text>
-      <Text style={fonts.subSubTitle}>{"\n"}0x Gilet d'or{"\n"}2 Votes</Text>
+      
           </View>
         )
    

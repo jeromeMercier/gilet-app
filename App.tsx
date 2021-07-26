@@ -19,7 +19,7 @@ import Signup from './views/Signup';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function App({ navigation }: { navigation: any }) {
+function App() {
   let [fontsLoaded] = useFonts({
     "Euro-Bold": require("./assets/fonts/EurostileBold.ttf"),
     "Euro-Extended": require("./assets/fonts/EurostileExtended.ttf"),
@@ -30,18 +30,22 @@ function App({ navigation }: { navigation: any }) {
     return <AppLoading />;
   } else {
     return (
-      <Provider store={store}>
-        <NavigationContainer theme={MyTheme}>
-          <Tab.Navigator
+      /* 
+      <NavigationContainer theme={MyTheme} tabBarVisible={false}>
+          <Tab.Navigator 
             tabBar={(props) => <MyTabBar {...props} />}
             initialRouteName="Home"
-          >
-            <Tab.Screen name="Pictures" component={Pictures} key="Pictures"/>
-            <Tab.Screen name="Beer" component={Beers} key="Beer"/>
-            <Tab.Screen name="signup" component={Signup} key="signUp"/>
-            <Tab.Screen name="Home" component={HomeScreen} key="Home"/>
-            <Tab.Screen name="Stats" component={Stats} key="Stats"/>
+          ><Tab.Screen name="Home" component={HomeScreen} key="Home"/>
+           
           </Tab.Navigator>
+        </NavigationContainer>
+        <Tab.Screen name="Pictures" component={Pictures} key="Pictures"/>
+            <Tab.Screen name="Beer" component={Beers} key="Beer"/>
+            
+            <Tab.Screen name="Stats" component={Stats} key="Stats"/>*/
+      <Provider store={store}>
+<NavigationContainer theme={MyTheme} tabBarVisible={false}>
+        <HomeScreen navigation={navigator}></HomeScreen>
         </NavigationContainer>
         </Provider>
     );

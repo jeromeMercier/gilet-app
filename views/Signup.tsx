@@ -1,57 +1,56 @@
 import React from 'react'
-import { View, TextInput, StyleSheet, TouchableOpacity, Text } from 'react-native'
+import { View, TextInput, StyleSheet, TouchableOpacity, Text, Button } from 'react-native'
 import Firebase from '../store/firebase'
 import { withNavigation } from 'react-navigation';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { updateEmail, updatePassword, signup } from '../store/actions'
+import Icons from '../components/Icons';
+import ButtonPrimary from '../components/ButtonPrimary';
 
 
 class Signup extends React.Component {
-
-    state = {
-        name: '',
-        email: '',
-        password: ''
-    }
-
     handleSignUp = () => {
-        const { email, password } = this.state
-        Firebase.auth()
-            .createUserWithEmailAndPassword(email, password)
-            .then(() => this.props.navigation.navigate('Profile'))
-            .catch(error => console.log(error))
+        this.props.signup()
+        this.props.navigation.navigate('recap')
     }
 
     render() {
         return (
             <View style={styles.container}>
+                <View style={styles.logoContainer}>
+        <Icons name="logoGDORbAw"></Icons>
+        </View>
                 <TextInput
                     style={styles.inputBox}
-                    value={this.state.name}
-                    onChangeText={name => this.setState({ name })}
-                    placeholder='Full Name'
-                />
-                <TextInput
-                    style={styles.inputBox}
-                    value={this.state.email}
-                    onChangeText={email => this.setState({ email })}
+                    value={this.props.user.email}
+                    onChangeText={email => this.props.updateEmail(email)}
                     placeholder='Email'
                     autoCapitalize='none'
                 />
                 <TextInput
                     style={styles.inputBox}
-                    value={this.state.password}
-                    onChangeText={password => this.setState({ password })}
+                    value={this.props.user.password}
+                    onChangeText={password => this.props.updatePassword(password)}
                     placeholder='Password'
                     secureTextEntry={true}
                 />
-                <TouchableOpacity style={styles.button} onPress={this.handleSignUp}>
-                <Text style={styles.buttonText}>Signup</Text>
-            </TouchableOpacity>
+                <View style={styles.containerButton}>
+                <ButtonPrimary title="Signup" onPress={this.handleSignUp}>
+                    
+                </ButtonPrimary>
+                </View>
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
+    logoContainer: {
+        paddingVertical:"10%",
+        height:"30%",
+        width:"100%"
+    },
     container: {
         flex: 1,
         backgroundColor: '#fff',
@@ -62,10 +61,17 @@ const styles = StyleSheet.create({
         width: '85%',
         margin: 10,
         padding: 15,
-        fontSize: 16,
+        fontSize: 20,
         borderColor: '#d3d3d3',
         borderBottomWidth: 1,
-        textAlign: 'center'
+
+        fontFamily:'Euro-Bold'
+    },
+    containerButton: {
+        width:"100%",
+        paddingHorizontal:"10%",
+        paddingTop:"10%",
+        paddingBottom:"5%"
     },
     button: {
         marginTop: 30,
@@ -88,4 +94,17 @@ const styles = StyleSheet.create({
     }
 })
 
-export default withNavigation(Signup);
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators({ updateEmail, updatePassword, signup }, dispatch)
+}
+
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Signup)

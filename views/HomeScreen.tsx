@@ -11,6 +11,8 @@ import VoteSingle from "../components/VoteSingle";
 import {useSelector, useDispatch} from 'react-redux';
 import {getUsers, addVote, removeVote} from '../store/actions';
 import usersReducer from '../store/reducers';
+import login from '../views/Login'
+import signUp from '../views/Signup'
 
 
 const Stack = createStackNavigator();
@@ -21,8 +23,11 @@ function HomeScreen({navigation}: {navigation: any}) {
     screenOptions={{
       headerShown: false,
     }}
-    initialRouteName="Page1"
+    initialRouteName="login"
   >
+    
+    <Stack.Screen name = "login" component={login}></Stack.Screen>
+    <Stack.Screen name = "Signup" component={signUp}></Stack.Screen>
     <Stack.Screen name="Recap" component={recap} />
     <Stack.Screen name="Votes" component={votesScreen} />
     <Stack.Screen name="VoteSingle" component={VoteSingle} />
@@ -64,16 +69,17 @@ const handleRemoveVote = user => {
   }
   else{
     return (
+      /*<Text>{users[0].name} {users[0].votes}</Text>
+        <Text>{users[1].name} {users[1].votes}</Text>
+        <Button title="ADD vote" onPress={() =>
+    handleAddVote('jerome')
+  }></Button>*/
          // @ts-ignore
         <View style={style.container}>
         <View style={style.logoContainer}>
         <Icons name="logoGDORbAw"></Icons>
         </View>
-        <Text>{users[0].name} {users[0].votes}</Text>
-        <Text>{users[1].name} {users[1].votes}</Text>
-        <Button title="ADD vote" onPress={() =>
-    handleAddVote('jerome')
-  }></Button>
+        
         <View style={style.podiumContainer}>
         <Podium></Podium>
         </View>
